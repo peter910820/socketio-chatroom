@@ -3,11 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Compiled and minified CSS -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>chatroom</title>
 </head>
 <body>
-    <h1>Chatroom</h1>
-    <ul id="messages"></ul>
-    <input id="input" autocomplete="off"><button id="send">發送訊息</button>
+    <div class="row">
+        <div class="col s4"></div>
+        <div class="col s4">
+            <h1>聊天大廳</h1>
+            <ul id="messages"></ul>
+            <input id="input" autocomplete="off">
+            <a class="btn-floating btn-large waves-effect waves-light red" onclick="router()">
+                <i class="material-icons">Go</i>
+            </a>
+        </div>
+        <div class="col s4"></div>
+    </div>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        function router() {
+            const route = document.getElementById('input').value;
+            if (route.trim() !== '') {
+                window.location.href = '/room/' + encodeURIComponent(route);
+            } else {
+                alert('value is null!');
+            }
+        }
+    </script>
 </body>
 </html>

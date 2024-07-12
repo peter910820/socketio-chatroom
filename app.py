@@ -9,9 +9,9 @@ socketio = SocketIO(app)
 def index():
     return render_template('index.html')
 
-@app.route('/a')
-def a():
-    return render_template('a_room.html')
+@app.route('/room/<string:room_name>')
+def a(room_name):
+    return render_template('room.html',room_name=room_name)
 
 @socketio.on('connect')
 def connect(auth):
@@ -33,11 +33,11 @@ def handle_leave(room_name):
 
 
 @socketio.on('message')
-def handle_message(data):
-    room = data['room']
+def handle_message(data: dict):
+    room = data['room_id']
     msg = data['msg']
     send(msg, to=room)
-    print('received message: ' + data)
+    print('received message: ' + msg)
     # send(data, broadcast=True)
 
 if __name__ == '__main__':
