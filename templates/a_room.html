@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chatroom</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let socket = io();
+            socket.on("connect", function() {
+                socket.emit('join', 'A');
+                console.log('Connected to A room');
+            });
+            socket.on('message', function(msg) {
+                    let li = document.createElement('li');
+                    li.innerText = msg;
+                    document.getElementById('messages').appendChild(li);
+            });
+            document.getElementById('send').onclick = function() {
+                    let msg = document.getElementById('input').value;
+                    let room = 'A';
+                    socket.emit('message', {room: room, msg: msg});
+                    document.getElementById('input').value = '';
+            };
+        })
+    </script>
+</head>
+<body>
+    <h1>Chatroom</h1>
+    <ul id="messages"></ul>
+    <input id="input" autocomplete="off"><button id="send">發送訊息</button>
+</body>
+</html>
