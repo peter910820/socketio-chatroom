@@ -21,17 +21,16 @@ def connect(auth):
 
 @socketio.on('disconnect')
 def disconnect():
-    print('Client disconnected')
+    emit('leave', 'an user has left the room')
 
 @socketio.on('join')
 def handle_join(room_name, username):
     join_room(room_name)
-    send({'msg': f' jump into {room_name}', 'username': username}, to=room_name)
+    emit('join', f'{username} jump into {room_name}', to=room_name)
 
 @socketio.on('leave')
 def handle_leave(room_name):
     leave_room(room_name)
-    send(f'User has left the room.', to=room_name)
 
 @socketio.on('message')
 def handle_message(data: dict):

@@ -16,9 +16,24 @@
                 socket.emit('join', '{{ room_name }}', '{{ username }}');
                 console.log(`Connected to {{ room_name }} room`);
             });
+            socket.on('join', function(msg) {
+                    let div = document.createElement('div');
+                    div.innerText = msg;
+                    let msgComponet = document.getElementById('messages').firstChild;
+                    document.getElementById('messages').insertBefore(div, msgComponet);
+            });
             socket.on('message', function(data) {
                     let div = document.createElement('div');
-                    div.innerText = `${data["username"]}> ${data["msg"]}`;
+
+                    let usernameSpan = document.createElement('span');
+                    usernameSpan.innerText = `${data["username"]}> `;
+                    usernameSpan.className = 'username-style';
+
+                    let msgSpan = document.createElement('span');
+                    msgSpan.innerText = `${data["msg"]}`;
+
+                    div.appendChild(usernameSpan);
+                    div.appendChild(msgSpan);
                     let firstComponet = document.getElementById('messages').firstChild;
                     document.getElementById('messages').insertBefore(div, firstComponet);
             });
@@ -34,8 +49,8 @@
     <div class="row">
         <div class="col s12 banner">
             <div>
-                <p>{{ room_name }} chatroom</p>
-                <p>Welcome: {{ username }}</p>
+                <p>你正在{{ room_name }} chatroom</p>
+                <p>歡迎使用者: {{ username }}</p>
             </div>
         </div>
         <div class="col s12 chat-block">
