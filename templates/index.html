@@ -20,18 +20,15 @@
             <form id="form" method="POST" onsubmit="router(event)">
                 <div class="input-field col s12">
                     <input id="username" name="username" type="text" class="validate">
-                    <label for="username">使用者姓名</label>
+                    <label for="username">使用者暱稱</label>
                 </div>
                 <div class="input-field col s12">
                     <input id="roomnumber" name="roomnumber" type="text" class="validate">
-                    <label for="roomnumber">房間號碼</label>
+                    <label for="roomnumber">房間名稱</label>
                 </div>
                 <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">Go</i></button>
             </form>
         </div>
-        <!-- <div class="col s12">
-            <ul id="messages"></ul>
-        </div> -->
     </div>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -46,7 +43,7 @@
                 form.setAttribute('action', `/room/${inputRoomnumber}`);
                 form.submit();  // 提交表單
             } else {
-                alert('input is null!');
+                alert('有選項為空!');
             }
         }
     </script>

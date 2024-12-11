@@ -1,36 +1,33 @@
-from flask import Flask, render_template, make_response, request
-from flask_socketio import join_room, leave_room, SocketIO, send, emit
+from flask import Flask
+from flask import make_response, render_template, request
+from flask_socketio import SocketIO
+from flask_socketio import emit, join_room, send
 
 app = Flask(__name__, template_folder='./templates')
-app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/room/<string:room_name>', methods=["POST","GET"])
+@app.route('/room/<string:room_name>', methods=["POST"])
 def handler(room_name):
-    resp = make_response(render_template('room.html', room_name = room_name, username = request.form["username"]))
-    resp.set_cookie('username',request.form["username"])
+    resp = make_response(render_template('room.html', room_name = request.form["roomnumber"], username = request.form["username"]))
+    resp.set_cookie('username', request.form["username"])
     return resp
 
 @socketio.on('connect')
-def connect(auth):
-    print('Client connected')
+def connect():
+    print('Client connect')
 
 @socketio.on('disconnect')
 def disconnect():
-    emit('leave', 'an user has left the room')
+    print('Client disconnect')
 
 @socketio.on('join')
 def handle_join(room_name, username):
     join_room(room_name)
     emit('join', f'{username} jump into {room_name}', to=room_name)
-
-@socketio.on('leave')
-def handle_leave(room_name):
-    leave_room(room_name)
 
 @socketio.on('message')
 def handle_message(data: dict):
