@@ -5,23 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <!-- Compiled and minified CSS -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+     <link rel="stylesheet" href="../static/style.css">
     <title>chatroom</title>
 </head>
 <body>
     <div class="row">
-        <div class="col s4"></div>
-        <div class="col s4">
-            <h1>聊天大廳</h1>
-            <ul id="messages"></ul>
+        <div class="col s12 banner">
+            <div>
+                <p>socketio-chatroom</p>
+                <p>使用socketio製作的簡易聊天室</p>
+            </div>
+        </div>
+        <div class="col s12 form">
             <form id="form" method="POST" onsubmit="router(event)">
-                <label for="inputUsername">輸入你的名字: </label>
-                <input id="inputUsername" name="inputUsername" autocomplete="off">
-                <label for="input">輸入房號: </label>
-                <input id="input" name="input" autocomplete="off">
+                <div class="input-field col s12">
+                    <input id="username" type="text" class="validate">
+                    <label for="username">使用者姓名</label>
+                </div>
+                <div class="input-field col s12">
+                    <input id="roomnumber" type="text" class="validate">
+                    <label for="roomnumber">房間號碼</label>
+                </div>
                 <button type="submit" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">Go</i></button>
             </form>
         </div>
-        <div class="col s4"></div>
+        <div class="col s12">
+            <ul id="messages"></ul>
+        </div>
     </div>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
