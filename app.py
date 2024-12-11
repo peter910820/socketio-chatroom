@@ -10,10 +10,9 @@ def index():
     return render_template('index.html')
 
 @app.route('/room/<string:room_name>', methods=["POST","GET"])
-def a(room_name):
-    request.form["input"]
-    resp = make_response(render_template('room.html', room_name = room_name, username = request.form["inputUsername"]))
-    resp.set_cookie('username',request.form["inputUsername"])
+def handler(room_name):
+    resp = make_response(render_template('room.html', room_name = room_name, username = request.form["username"]))
+    resp.set_cookie('username',request.form["username"])
     return resp
 
 @socketio.on('connect')
@@ -33,7 +32,6 @@ def handle_join(room_name, username):
 def handle_leave(room_name):
     leave_room(room_name)
     send(f'User has left the room.', to=room_name)
-
 
 @socketio.on('message')
 def handle_message(data: dict):

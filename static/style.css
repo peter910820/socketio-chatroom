@@ -10,13 +10,6 @@ body {
     background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
     }
 
-#messages{
-    border: solid;
-    height: 500px;
-    max-height: 500px;
-    text-align: start;
-}
-
 .row {
     min-height: 100vh;
     .banner {
@@ -28,7 +21,7 @@ body {
         position: relative;
         border: 2px solid blanchedalmond;
         border-radius: 100px;
-        padding: 0;
+        padding: 0 !important;
         > div {
             min-height: 100%;
             max-width: 100%;
@@ -58,9 +51,57 @@ body {
     background-color: rgba(0, 0, 0, 0.6);
     > form {
         display: inline-block;
+        padding-top: 10px;
+        > div {
+            min-width: 100%;
+        }
     }
 }
 
 .input-field input {
     color: white
+}
+
+.chat-block {
+    margin: 10px;
+    padding-bottom: 10px !important;
+    border: 2px solid wheat;
+    border-radius: 50px;
+    display: block;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    > .input-field {
+        display: inline-block;
+        min-width: 75%;
+        > .button {
+            margin-top: 5px;
+        }
+    }
+    > .messages {
+        display: inline-block;
+        > #messages{
+            border: 2px solid transparent;
+            border-radius: 50px;
+            min-height: 500px;
+            max-height: 500px;
+            text-align: start;
+            font-size: 20px;
+            color: white;
+            padding: 25px;
+        }
+
+    }
+}
+
+.scrollbar::-webkit-scrollbar{
+    height: 4px;
+}
+.scrollbar::-webkit-scrollbar-track {
+    background-color: rgba(245, 222, 179, 0.3);
+    border-radius: 50px;
+    margin: 80px 150px;
+}
+.scrollbar::-webkit-scrollbar-thumb{
+    border-radius: 50px;
+    background-color: wheat;
 }
